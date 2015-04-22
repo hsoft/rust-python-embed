@@ -1,0 +1,5 @@
+*.so
+*.a
+/rust/target
+/pymodule/build
+
