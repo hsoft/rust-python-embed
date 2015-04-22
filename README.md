@@ -9,6 +9,12 @@ The `pymodule` folder contains a python C extension that links to the `rust` lib
 
 The end result is a `_myrustlib` module that is callable from Python 3.3+.
 
+## Features
+
+* Direct Python modules (no `cffi` or `ctypes`)
+* `int` argument passing and returning
+* Global static variables in Rust, controlled with locks
+
 ## Requirements
 
 * Python 3.3+
@@ -18,5 +24,8 @@ The end result is a `_myrustlib` module that is callable from Python 3.3+.
 
     ./build.sh
 
-The resulting `_myrustlib.so` file will be in the `pymodule` folder.
+The resulting `_myrustlib.so` file will be in the root folder. You can test that it works well
+by running:
+
+    python3 try.py
 

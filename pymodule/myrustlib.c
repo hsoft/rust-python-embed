@@ -6,8 +6,6 @@ static PyObject*
 py_triple(PyObject *self, PyObject *args)
 {
     long value;
-    Py_ssize_t char_count, color_count, i;
-    PyObject *result;
     
     if (!PyArg_ParseTuple(args, "l", &value)) {
         return NULL;
@@ -17,9 +15,32 @@ py_triple(PyObject *self, PyObject *args)
     return PyLong_FromLong(value);
 }
 
+static PyObject*
+py_stack_push(PyObject *self, PyObject *args)
+{
+    long value, res;
+    
+    if (!PyArg_ParseTuple(args, "l", &value)) {
+        return NULL;
+    }
+    
+    res = stack_push(value);    
+    return PyLong_FromLong(res);
+}
+
+static PyObject*
+py_stack_pull(PyObject *self, PyObject *args)
+{
+    long res;
+    
+    res = stack_pull();    
+    return PyLong_FromLong(res);
+}
+
 static PyMethodDef MyRustLibMethods[] = {
-    {"triple",  py_triple, METH_VARARGS,
-     "Triples `value`"},
+    {"triple",  py_triple, METH_VARARGS},
+    {"stack_push",  py_stack_push, METH_VARARGS},
+    {"stack_pull",  py_stack_pull, METH_VARARGS},
     {NULL, NULL, 0, NULL} /* Sentinel */
 };
 
